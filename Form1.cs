@@ -28,18 +28,26 @@ namespace Gerador_de_Chaves
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if(rd_dias.Checked == true)
+            if(txt_id.Text != "")
             {
-                Dias();
+                if (rd_dias.Checked == true)
+                {
+                    Dias();
+                }
+                if (rd_mes.Checked == true)
+                {
+                    Mês();
+                }
+                if (rd_data.Checked == true)
+                {
+                    Date();
+                }
             }
-            if(rd_mes.Checked == true)
+            else
             {
-                Mês();
+                txt_chave.Text = "INFORME O ID DA INSTALAÇÃO";
             }
-            if(rd_data.Checked == true)
-            {
-                Date();
-            }
+           
 
         }
         private void Dias()
@@ -73,13 +81,21 @@ namespace Gerador_de_Chaves
                 Prazo = Licença.Base64Encode("110 Dias");
             if (Radio == 0)
                 Prazo = Licença.Base64Encode("120 Dias");
-
-            string Chave = ID +"#"+ Tipo + "#" + Prazo;
-            txt_chave.Text = Chave;
+            if (Prazo == "0")
+            {
+                txt_chave.Text = "QUANTIDADE DE DIAS NÃO ESPECIFICADO";
+            }
+            else
+            {
+                string Chave = ID + "#" + Tipo + "#" + Prazo;
+                txt_chave.Text = Chave;
+            }
+           
 
         }
         private void Mês()
         {
+            
             string Prazo = "0";
             string ID = Licença.Base64Encode(txt_id.Text);
             string Tipo = Licença.Base64Encode("Mês");
@@ -94,11 +110,20 @@ namespace Gerador_de_Chaves
             if (Radio == 0)
                 Prazo = Licença.Base64Encode("4 Meses");
 
-            string Chave = ID + "#" + Tipo + "#" + Prazo;
-            txt_chave.Text = Chave;
+            if (Prazo == "0")
+            {
+                txt_chave.Text = "QUANTIDADE DE MESES NÃO ESPECIFICADO";
+            }
+            else
+            {
+                string Chave = ID + "#" + Tipo + "#" + Prazo;
+                txt_chave.Text = Chave;
+            }
+           
         }
         private void Date()
         {
+           
             string Prazo = "0";
             string ID = Licença.Base64Encode(txt_id.Text);
             string Tipo = Licença.Base64Encode("Data");
@@ -107,11 +132,18 @@ namespace Gerador_de_Chaves
             string dataFinal = Data.Value.ToString();
             TimeSpan date = Convert.ToDateTime(dataFinal) - Convert.ToDateTime(dataInicial);
             int totalDias = date.Days;
+            if (totalDias  == 0)
+            {
+                txt_chave.Text = "A QUANTIDADE DE DIAS PRECISA SER MAIOR DO QUE 10 DIAS";
+            }
+            else
+            {
+                Prazo = Licença.Base64Encode(totalDias.ToString());
 
-            Prazo = Licença.Base64Encode(totalDias.ToString());
-
-            string Chave = ID + "#" + Tipo + "#" + Prazo;
-            txt_chave.Text = Chave;
+                string Chave = ID + "#" + Tipo + "#" + Prazo;
+                txt_chave.Text = Chave;
+            }
+           
         }
         private int GetCheckedRadioButton(GroupBox controls)
         {
@@ -133,6 +165,7 @@ namespace Gerador_de_Chaves
             Ocultar();
             if (rd_dias.Checked == true)
             {
+                lb_texto_quantidades.Text = "Informe a quantidade de dias";
                 Grup_dias.Visible = true;
                 Grup_dias.Location = new Point(13, 157);
             }           
@@ -142,6 +175,7 @@ namespace Gerador_de_Chaves
             Ocultar();
             if (rd_mes.Checked == true)
             {
+                lb_texto_quantidades.Text = "Informe os Meses a Vencer";
                 Grup_mes.Visible = true;
                 Grup_mes.Location = new Point(13, 157);
             }
@@ -151,6 +185,7 @@ namespace Gerador_de_Chaves
             Ocultar();
             if (rd_data.Checked == true)
             {
+                lb_texto_quantidades.Text = "Informe a Data a Vencer";
                 Data.Visible = true;
                 Data.Location = new Point(13, 157);
             }

@@ -255,9 +255,8 @@
             this.lb_texto_quantidades.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.lb_texto_quantidades.Location = new System.Drawing.Point(30, 140);
             this.lb_texto_quantidades.Name = "lb_texto_quantidades";
-            this.lb_texto_quantidades.Size = new System.Drawing.Size(195, 17);
+            this.lb_texto_quantidades.Size = new System.Drawing.Size(0, 17);
             this.lb_texto_quantidades.TabIndex = 10;
-            this.lb_texto_quantidades.Text = "Informe a quantidade de dias";
             // 
             // groupBox2
             // 
@@ -484,7 +483,6 @@
             this.txt_id.Name = "txt_id";
             this.txt_id.Size = new System.Drawing.Size(473, 25);
             this.txt_id.TabIndex = 7;
-            this.txt_id.Text = "401091805827758";
             this.txt_id.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
